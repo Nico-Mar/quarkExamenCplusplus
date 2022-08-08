@@ -3,7 +3,11 @@
 Vendedor::Vendedor(std::string nombre, std::string apellido, int codigo) :  nombre(nombre),
                                                                             apellido(apellido),
                                                                             codigo(codigo) {}
-Vendedor::~Vendedor() {}
+Vendedor::~Vendedor() {
+    for (Cotizacion *cotizacion:cotizaciones) {
+        delete cotizacion;
+    }
+}
 
 const std::string &Vendedor::getNombre() const {
     return nombre;
@@ -66,7 +70,6 @@ void Vendedor::realizarCotizacion(int tipoPrenda,int tipoCorte,int tipoManga,int
         cotizacion->imprimirCotizacion();
         cotizaciones.push_back(cotizacion);
     }
-
 }
 
 void Vendedor::imprimirHistorial() {

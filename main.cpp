@@ -12,6 +12,7 @@ int main(){
     Vendedor v1 = Vendedor("Nicolas", "Martini", 1228);
     v1.setTienda(pt1);
     Vendedor* pv1 = &v1;
+    t1.agregarVendedor(pv1);
     t1.agregarPrenda(new Camisa(pt1,175,Calidad::STANDARD,Cuello::COMUN,Manga::LARGA));
     t1.agregarPrenda(new Camisa(pt1,175,Calidad::PREMIUM,Cuello::COMUN,Manga::LARGA));
     t1.agregarPrenda(new Camisa(pt1,75,Calidad::STANDARD,Cuello::MAO,Manga::LARGA));

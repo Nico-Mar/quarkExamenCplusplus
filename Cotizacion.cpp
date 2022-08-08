@@ -13,9 +13,9 @@ void Cotizacion::imprimirCotizacion() {
     std::cout<<"\tFECHA Y HORA DE COTIZACION: "<<date<<std::endl;
     std::cout<<"\tCODIGO DEL VENDEDOR: "<<codigoVendedor<<std::endl;
     std::cout<<"\tPRENDA COTIZADA: "<<nombrePrenda<<std::endl;
-    std::cout<<"\tPRECIO UNITARIO: "<<prenda->getPrecioFinal()<<std::endl;
+    std::cout<<"\tPRECIO UNITARIO: $"<<prenda->getPrecioFinal()<<std::endl;
     std::cout<<"\tCANTIDAD DE UNIDADES COTIZADAS: "<<cantidad<<std::endl;
-    std::cout<<"\tPRECIO FINAL: "<<resultado<<std::endl;
+    std::cout<<"\tPRECIO FINAL: $"<<resultado<<std::endl;
     system("pause");
 
 }

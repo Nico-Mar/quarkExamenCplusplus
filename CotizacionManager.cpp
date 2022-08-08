@@ -33,6 +33,8 @@ void CotizacionManager::displayFirstStep() {
     std::cout<<"\t1) Camisa"<<std::endl;
     std::cout<<"\t2) Pantalon"<<std::endl;
     std::cout<<"\t................................................"<<std::endl;
+    std::cout<<"\t3) Volver al Menu Principal"<<std::endl;
+    std::cout<<"\t................................................"<<std::endl;
     std::cout<<"Opcion: ";
 }
 
@@ -41,6 +43,10 @@ void CotizacionManager::displaySecondStep() {
     std::cout<<"\tPASO 2-1: Selecciona el tipo de manga"<<std::endl;
     std::cout<<"\t1) Manga Larga"<<std::endl;
     std::cout<<"\t2) Manga Corta"<<std::endl;
+    std::cout<<"\t................................................"<<std::endl;
+    std::cout<<"\t3) Volver al Menu Principal"<<std::endl;
+    std::cout<<"\t................................................"<<std::endl;
+    std::cout<<"Opcion: ";
 }
 
 void CotizacionManager::displayThirdStep() {
@@ -48,6 +54,10 @@ void CotizacionManager::displayThirdStep() {
     std::cout<<"\tPASO 2-2: Selecciona el tipo de cuello"<<std::endl;
     std::cout<<"\t1) Cuello Comun"<<std::endl;
     std::cout<<"\t2) Cuello Mao"<<std::endl;
+    std::cout<<"\t................................................"<<std::endl;
+    std::cout<<"\t3) Volver al Menu Principal"<<std::endl;
+    std::cout<<"\t................................................"<<std::endl;
+    std::cout<<"Opcion: ";
 }
 
 void CotizacionManager::displaySecondStepPantalon() {
@@ -55,6 +65,10 @@ void CotizacionManager::displaySecondStepPantalon() {
     std::cout<<"\tPASO 2: Selecciona el corte del pantalon"<<std::endl;
     std::cout<<"\t1) Pantalon Comun"<<std::endl;
     std::cout<<"\t2) Pantalon Chupin"<<std::endl;
+    std::cout<<"\t................................................"<<std::endl;
+    std::cout<<"\t3) Volver al Menu Principal"<<std::endl;
+    std::cout<<"\t................................................"<<std::endl;
+    std::cout<<"Opcion: ";
 }
 
 void CotizacionManager::displayQualityStep() {
@@ -62,6 +76,10 @@ void CotizacionManager::displayQualityStep() {
     std::cout<<"\tPASO 3: Selecciona la calidad de la prenda"<<std::endl;
     std::cout<<"\t1) Calidad Standard"<<std::endl;
     std::cout<<"\t2) Calidad Premium"<<std::endl;
+    std::cout<<"\t................................................"<<std::endl;
+    std::cout<<"\t3) Volver al Menu Principal"<<std::endl;
+    std::cout<<"\t................................................"<<std::endl;
+    std::cout<<"Opcion: ";
 }
 
 void CotizacionManager::menuHistorial(Vendedor *vendedor) {
@@ -79,11 +97,9 @@ void CotizacionManager::ignoreLine() {
 double CotizacionManager::getDouble() {
     while (true) // Loop until user enters a valid input
     {
-        system("cls");
-        imprimirEncabezado("REALIZAR COTIZACION",false);
-        std::cout << "\tIngresar el precio de la prenda: "<<std::endl;
+
         double x{};
-        std::cout << "\tPrecio: $ ";
+
         std::cin >> x;
 
         // Check for failed extraction
@@ -103,16 +119,12 @@ double CotizacionManager::getDouble() {
     }
 }
 
-double CotizacionManager::getInteger() {
+
+int CotizacionManager::getInteger() {
     while (true) // Loop until user enters a valid input
     {
-        system("cls");
-        imprimirEncabezado("REALIZAR COTIZACION",false);
-        std::cout << "\tIngresar la cantidad de prendas a cotizar: "<<std::endl;
         int x{};
-        std::cout << "\tCantidad: ";
         std::cin >> x;
-
         // Check for failed extraction
         if (!std::cin) // has a previous extraction failed?
         {
@@ -120,7 +132,6 @@ double CotizacionManager::getInteger() {
             std::cin.clear(); // put us back in 'normal' operation mode
             ignoreLine(); // and remove the bad input
             std::cerr << "\tEl numero ingresado no es valido. Por favor intente nuevamente."<<std::endl;
-            system("pause");
         }
         else
         {
@@ -140,7 +151,15 @@ void CotizacionManager::menuCalidad(int tipoPrenda,int tipoCorte,int tipoManga,i
         switch (tipoCalidad) {
             case 1:
             case 2:
+                system("cls");
+                imprimirEncabezado("REALIZAR COTIZACION",false);
+                std::cout << "\tIngresar el precio de la prenda: "<<std::endl;
+                std::cout << "\tPrecio: $ ";
                 precio = getDouble();
+                system("cls");
+                imprimirEncabezado("REALIZAR COTIZACION",false);
+                std::cout << "\tIngresar la cantidad de prendas a cotizar: "<<std::endl;
+                std::cout << "\tCantidad: ";
                 cantidad = getInteger();
                 vendedor->realizarCotizacion(tipoPrenda,tipoCorte,tipoManga,tipoCuello,tipoCalidad,cantidad,precio);
                 exitOption = true;
@@ -149,7 +168,7 @@ void CotizacionManager::menuCalidad(int tipoPrenda,int tipoCorte,int tipoManga,i
                 exitOption = true;
                 break;
             default:
-                std::cout<<"Debe elegir una de las opciones disponibles"<<std::endl;
+                std::cout<<"\tDebe elegir una de las opciones disponibles"<<std::endl;
                 system("pause");
                 break;
         }
@@ -161,7 +180,7 @@ void CotizacionManager::menuPantalon(int tipoPrenda,Vendedor *vendedor) {
     do{
         system("cls");
         displaySecondStepPantalon();
-        std::cin>>tipoCorte;
+        tipoCorte = getInteger();
         switch (tipoCorte){
             case 1:
             case 2:
@@ -172,7 +191,7 @@ void CotizacionManager::menuPantalon(int tipoPrenda,Vendedor *vendedor) {
                 break;
 
             default:
-                std::cout<<"Debe elegir una de las opciones disponibles"<<std::endl;
+                std::cout<<"\tDebe elegir una de las opciones disponibles"<<std::endl;
                 system("pause");
                 break;
         }
@@ -184,14 +203,14 @@ void CotizacionManager::menuCamisa(int tipoPrenda,Vendedor *vendedor) {
     do{
         system("cls");
         displaySecondStep();
-        std::cin>>tipoManga;
+        tipoManga = getInteger();
         switch (tipoManga){
             case 1:
             case 2:
                 do{
                     system("cls");
                     displayThirdStep();
-                    std::cin>>tipoCuello;
+                    tipoCuello = getInteger();
                     switch (tipoCuello){
                         case 1:
                         case 2:
@@ -200,7 +219,7 @@ void CotizacionManager::menuCamisa(int tipoPrenda,Vendedor *vendedor) {
                             exitOption = true;
                             break;
                         default:
-                            std::cout<<"Debe elegir una de las opciones disponibles"<<std::endl;
+                            std::cout<<"\tDebe elegir una de las opciones disponibles"<<std::endl;
                             system("pause");
                             break;
                     }
@@ -210,7 +229,7 @@ void CotizacionManager::menuCamisa(int tipoPrenda,Vendedor *vendedor) {
                 exitOption = true;
                 break;
             default:
-                std::cout<<"Debe elegir una de las opciones disponibles"<<std::endl;
+                std::cout<<"\tDebe elegir una de las opciones disponibles"<<std::endl;
                 system("pause");
                 break;
         }
@@ -223,7 +242,7 @@ void CotizacionManager::menuPrenda(Vendedor *vendedor) {
     do{
         system("cls");
         displayFirstStep();
-        std::cin>>tipoPrenda;
+        tipoPrenda = getInteger();
         switch (tipoPrenda)
         {
             case 1:
@@ -236,7 +255,7 @@ void CotizacionManager::menuPrenda(Vendedor *vendedor) {
                 exitOption = true;
                 break;
             default:
-                std::cout<<"Debe elegir una de las opciones disponibles"<<std::endl;
+                std::cout<<"\tDebe elegir una de las opciones disponibles"<<std::endl;
                 system("pause");
                 break;
         }
@@ -248,7 +267,7 @@ void CotizacionManager::menu(Vendedor *vendedor) {
     do{
         system("cls");
         displayfirstOptions(vendedor);
-        std::cin>>option;
+        option = getInteger();
         switch (option){
             case 1:
                 menuHistorial(vendedor);
@@ -259,7 +278,7 @@ void CotizacionManager::menu(Vendedor *vendedor) {
             case 3:
                 break;
             default:
-                std::cout<<"Debe elegir una de las opciones disponibles"<<std::endl;
+                std::cout<<"\tDebe elegir una de las opciones disponibles"<<std::endl;
                 system("pause");
                 break;
         }

@@ -29,8 +29,7 @@ public:
     void menu(Vendedor *vendedor);
     void displayQualityStep();
     void menuCalidad(int tipoPrenda, int tipoCorte, int tipoManga, int tipoCuello, Vendedor *vendedor);
-
-    double getInteger();
+    int getInteger();
 };
 
 
